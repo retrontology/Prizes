@@ -1,0 +1,37 @@
+main: com.retrontology.prizes.Prizes
+name: Prizes
+version: 0.0.1
+author: Retrontology
+description: A system for distribution of prizes
+permissions: 
+  prizes.citizen:
+    description: Required for redeeming prizes
+    default: false
+  prizes.admin:
+    description: Required for server admin commands such as reset, update, etc
+    default: false
+commands:
+  prize:
+    description: A system for distribution of prizes
+    aliases: [prizes] 
+    permission: prizes.citizen
+    permission-message: Become a citizen to access the prize system
+    usage: |
+      Use /help prizes [subcommand] for more information
+      /prizes - View Top Survivor Leaderboard
+      /prize check - View Top Survivor Leaderboard
+      /prize claim - Reset Top Survivor Leaderboard
+  prize check:
+    description: Check to see what prizes you have
+    aliases: [prize view]
+    permission: prizes.citizen
+    permission-message: Become a citizen to access the prize system
+    usage: |
+      /prize check
+  prize claim:
+    description: Claim your prize (if you have one)
+    aliases: [prize get]
+    permission: prizes.citizen
+    permission-message: Become a citizen to access the prize system
+    usage: |
+      /prize claim
