@@ -1,0 +1,31 @@
+TopSurvivor.NumberOfPrizes: 3
+TopSurvivor.1.XP: 100000
+TopSurvivor.1.Items:
+- ==: org.bukkit.inventory.ItemStack
+  type: DIAMOND_AXE
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: §c§lThors Hammer
+    lore:
+      - §3Hammer of the Gods! Click to use.
+TopSurvivor.2.XP: 50000
+TopSurvivor.2.Items:
+- ==: org.bukkit.inventory.ItemStack
+  type: DIAMOND_AXE
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: §c§lThors Hammer
+    lore:
+      - §3Hammer of the Gods! Click to use.
+TopSurvivor.3.XP: 10000
+TopSurvivor.3.Items:
+- ==: org.bukkit.inventory.ItemStack
+  type: DIAMOND_AXE
+  meta:
+    ==: ItemMeta
+    meta-type: UNSPECIFIC
+    display-name: §c§lThors Hammer
+    lore:
+      - §3Hammer of the Gods! Click to use.
