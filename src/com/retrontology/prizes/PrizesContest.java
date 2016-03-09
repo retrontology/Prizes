@@ -2,13 +2,16 @@ package com.retrontology.prizes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class PrizesContest {
 	
@@ -16,7 +19,6 @@ public class PrizesContest {
 	private Prizes plugin;
 	private File filedir;
 	private String contest;
-	private HashMap<String, FileConfiguration> configs;
 
 	/* Constructor */
 	public PrizesContest(Prizes plugin, String contest) {
@@ -47,7 +49,7 @@ public class PrizesContest {
 	public File getFile(String s){ return new File(filedir, File.separator+s+".yml"); }
 	
 	// Get collection of files in directory
-	
+	public List<File> getFileList(){ return new ArrayList<File>(Arrays.asList(filedir.listFiles())); }
 	
 	// Make winners file from collection of OfflinePlayers
 	// (for Top Survivor)
@@ -65,7 +67,8 @@ public class PrizesContest {
 		    }
 			FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 			for(int i = 1; (i <= plugin.getPrizesConfig().getNumberOfPrizes(filedir.getName())) && (i <= list.size()); i++){
-				config.set(""+i, list.get(i-1).getName());
+				config.set(i+".Name", list.get(i-1).getName());
+				config.set(i+".Claimed", false);
 				try {
 			        config.save(file);
 			        plugin.getServer().getLogger().info("[Prizes] " + list.get(i-1).getName() + " has been set as place " + i + " in " );
@@ -79,8 +82,49 @@ public class PrizesContest {
 		}
 	}
 	
-	
-	
 	// Check to see what prizes a player has
+	public List<String> checkPrizes(String player){
+		List<String> prizestrings = new ArrayList<String>();
+		for(File contestfile : getFileList()){
+			FileConfiguration config = YamlConfiguration.loadConfiguration(contestfile);
+			for(int i = 1; (config.getString(""+i) != null); i++){
+				if(player.equalsIgnoreCase(config.getString(i+".Name")) && !config.getBoolean(i+".Claimed")){
+					prizestrings.add(contest + ": " + i);
+				}
+			}
+		}
+		return prizestrings;
+	}
+	
+	// Claim a players prizes
+	// Returns false if the player can't hold as many items as they can claim
+	public boolean claimPrizes(Player player){
+		boolean invfull = false;
+		int freespace = 0;
+		for (ItemStack i : player.getInventory()) { if (i == null) { freespace++; } }
+		if(freespace == 0){ invfull = true; }
+		for(File file : getFileList()){
+			if(invfull){ break; }
+			FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+			for(int i = 1; (config.getString(""+i) != null); i++){
+				if(player.getName().equalsIgnoreCase(config.getString(i+".Name")) && !config.getBoolean(i+".Claimed")){
+					List<ItemStack> list = plugin.getPrizesConfig().getPrizeItemList(filedir.getName(), i);
+					if(list.size()>freespace){
+						invfull = true;
+						break;
+					}else{
+						for(ItemStack items : list){ player.getInventory().addItem(items); }
+						config.set(i+".Claimed", true);
+						try {
+					        config.save(file);
+					    } catch (IOException e) {
+					        e.printStackTrace();
+					    }
+					}
+				}
+			}
+		}
+		return !invfull;
+	}
 	
 }

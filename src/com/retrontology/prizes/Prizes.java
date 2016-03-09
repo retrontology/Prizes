@@ -1,15 +1,11 @@
 package com.retrontology.prizes;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Prizes extends JavaPlugin {
@@ -37,6 +33,15 @@ public class Prizes extends JavaPlugin {
 	
 	// Get PrizesConfig
 	public PrizesConfig getPrizesConfig(){ return pconfig; }
+	
+	// Get all PrizesContest(s)
+	public List<PrizesContest> getPrizesContests(){
+		List<PrizesContest> list = new ArrayList<PrizesContest>();
+		for(File file : new File(this.getDataFolder(), File.separator + "Contests").listFiles()){
+			if(file.isDirectory()){ list.add(new PrizesContest(this, file.getName())); }
+		}
+		return list;
+	}
 	
 	// Make file
 	public static boolean makeFileFromList(String contest, List<OfflinePlayer> list){

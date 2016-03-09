@@ -2,10 +2,8 @@ package com.retrontology.prizes;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -22,14 +20,14 @@ public class PrizesConfig {
 			// Set Class Variables
 			this.plugin = plugin;
 			// Init directory if it's not there
-			File filedir = new File(plugin.getServer().getPluginManager().getPlugin("Prizes").getDataFolder().toString());
+			File filedir = new File(this.plugin.getServer().getPluginManager().getPlugin("Prizes").getDataFolder().toString());
 	        if (!filedir.exists()) { filedir.mkdir(); }
 	        // Load config or copy over default if there isn't one
 	        file = new File(filedir, File.separator+"config.yml");
 	        if(!file.exists()){
-				plugin.saveDefaultConfig();
+				this.plugin.saveDefaultConfig();
 				config = YamlConfiguration.loadConfiguration(file);
-				plugin.getServer().getLogger().info("[Prizes] No config file was found so the default file was copied over");
+				this.plugin.getServer().getLogger().info("[Prizes] No config file was found so the default file was copied over");
 			}else{ config = YamlConfiguration.loadConfiguration(file); }
 	}
 	
