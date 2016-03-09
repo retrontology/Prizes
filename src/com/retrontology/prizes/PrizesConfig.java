@@ -2,6 +2,7 @@ package com.retrontology.prizes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Material;
