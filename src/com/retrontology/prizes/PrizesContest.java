@@ -108,12 +108,14 @@ public class PrizesContest {
 			FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 			for(int i = 1; (config.getString(""+i) != null); i++){
 				if(player.getName().equalsIgnoreCase(config.getString(i+".Name")) && !config.getBoolean(i+".Claimed")){
-					List<ItemStack> list = plugin.getPrizesConfig().getPrizeItemList(filedir.getName(), i);
+					List<ItemStack> list = plugin.getPrizesConfig().getPrizeItemList(contest, i);
 					if(list.size()>freespace){
 						invfull = true;
 						break;
 					}else{
 						for(ItemStack items : list){ player.getInventory().addItem(items); }
+						freespace -= list.size();
+						player.giveExp(plugin.getPrizesConfig().getPrizeXP(contest, i));
 						config.set(i+".Claimed", true);
 						try {
 					        config.save(file);
