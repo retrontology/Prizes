@@ -54,24 +54,24 @@ public class PrizesContest {
 	// Make winners file from collection of OfflinePlayers
 	// (for Top Survivor)
 	// returns false if the file already exists
-	public boolean makeFileFromList(List<OfflinePlayer> list){
+	public boolean makeFileFromList(List<String> list){
 		Date date = new Date();
 		File file = getFile(""+date.getTime());
 		if(!file.exists()){
 			try {
 		        file.createNewFile();
-		        plugin.getServer().getLogger().info("[Prizes] File Created: Contests" + File.separator + filedir.getName() + File.separator + date.getTime() + ".yml");
+		        plugin.getServer().getLogger().info("[Prizes] File Created: Contests" + File.separator + contest + File.separator + date.getTime() + ".yml");
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		        return false;
 		    }
 			FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-			for(int i = 1; (i <= plugin.getPrizesConfig().getNumberOfPrizes(filedir.getName())) && (i <= list.size()); i++){
-				config.set(i+".Name", list.get(i-1).getName());
+			for(int i = 1; (i <= plugin.getPrizesConfig().getNumberOfPrizes(contest)) && (i <= list.size()); i++){
+				config.set(i+".Name", list.get(i-1));
 				config.set(i+".Claimed", false);
 				try {
 			        config.save(file);
-			        plugin.getServer().getLogger().info("[Prizes] " + list.get(i-1).getName() + " has been set as place " + i + " in " );
+			        plugin.getServer().getLogger().info("[Prizes] " + list.get(i-1) + " has been set as place " + i + " in " );
 			    } catch (IOException e) {
 			        e.printStackTrace();
 			    }

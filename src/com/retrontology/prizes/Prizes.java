@@ -43,11 +43,25 @@ public class Prizes extends JavaPlugin {
 		return list;
 	}
 	
-	// Make file
-	public static boolean makeFileFromList(String contest, List<OfflinePlayer> list){
+	// Make file from List of Strings
+	public static boolean makeFileFromStringList(String contest, List<String> list){
 		PrizesContest pcontest = new PrizesContest((Prizes) server.getPluginManager().getPlugin("Prizes"), contest);
 		if(pcontest.exists()){
 			pcontest.makeFileFromList(list);
+			return true;
+		}else{ 
+			server.getLogger().info("[Prizes] The specified Contest was not found");
+			return false; 
+		}
+	}
+	
+	// Make file from List of OfflinePlayers
+	public static boolean makeFileFromList(String contest, List<OfflinePlayer> list){
+		List<String> stringlist = new ArrayList<String>();
+		for(OfflinePlayer player : list){ stringlist.add(player.getName()); }
+		PrizesContest pcontest = new PrizesContest((Prizes) server.getPluginManager().getPlugin("Prizes"), contest);
+		if(pcontest.exists()){
+			pcontest.makeFileFromList(stringlist);
 			return true;
 		}else{ 
 			server.getLogger().info("[Prizes] The specified Contest was not found");
