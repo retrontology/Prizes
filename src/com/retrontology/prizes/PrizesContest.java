@@ -45,6 +45,38 @@ public class PrizesContest {
 		}else{ return false; }
 	}
 	
+	// Get player by place in file
+	public String getPlayer(String file, int place){ return YamlConfiguration.loadConfiguration(getFile(file)).getString(place+".Name"); }
+	
+	// Get Claimed by place in file
+	public boolean getClaimed(String file, int place){ return YamlConfiguration.loadConfiguration(getFile(file)).getBoolean(place+".Claimed"); }
+	
+	// Set player by place in file
+	public boolean setPlayer(String file, int place, String player){
+		FileConfiguration config = YamlConfiguration.loadConfiguration(getFile(file));
+		config.set(place+".Name", player);
+		try {
+	        config.save(getFile(file));
+	        return true;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
+	// Set Claimed by place in file
+	public boolean setClaimed(String file, int place, boolean b){
+		FileConfiguration config = YamlConfiguration.loadConfiguration(getFile(file));
+		config.set(place+".Claimed", b);
+		try {
+	        config.save(getFile(file));
+	        return true;
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+	
 	// Get File in contest by name
 	public File getFile(String s){ return new File(filedir, File.separator+s+".yml"); }
 	
@@ -128,5 +160,8 @@ public class PrizesContest {
 		}
 		return !invfull;
 	}
+	
+	// Equals
+	public boolean equals(String s){ return s.equals(contest); }
 	
 }

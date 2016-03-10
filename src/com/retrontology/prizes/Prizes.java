@@ -13,6 +13,7 @@ public class Prizes extends JavaPlugin {
 	/* Class Variables */
 	private PrizesConfig pconfig;
 	private static Server server;
+	private static Prizes plugin;
 
 	/* Startup */
 	@Override
@@ -20,6 +21,10 @@ public class Prizes extends JavaPlugin {
 		// Init class variables
 		pconfig = new PrizesConfig(this);
 		server = this.getServer();
+		plugin = this;
+		
+		// Register Commands
+		this.getCommand("prizes").setExecutor(new PrizesCommandExecutor(this));
 	}
 	
 	
