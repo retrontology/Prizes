@@ -141,15 +141,15 @@ public class PrizesCommandExecutor implements CommandExecutor {
 								if(!file.exists()){
 									try {
 								        file.createNewFile();
-								        player.sendMessage(ChatColor.GREEN + "The file " + args[1] + " has been created for the " + args[0] + " contest");
+								        player.sendMessage(ChatColor.GREEN + "The file " + args[2] + " has been created for the " + args[1] + " contest");
 								        return true;
 								    } catch (IOException e) {
 								        e.printStackTrace();
-								        player.sendMessage(ChatColor.RED + "The file " + args[1] + " could not be created for the " + args[0] + " contest");
+								        player.sendMessage(ChatColor.RED + "The file " + args[2] + " could not be created for the " + args[1] + " contest");
 								        return true;
 								    }
 								}else{
-									player.sendMessage(ChatColor.RED + "The file " + args[1] + " already exists in the " + args[0] + " contest");
+									player.sendMessage(ChatColor.RED + "The file " + args[2] + " already exists in the " + args[1] + " contest");
 									return true;
 								}
 							}else{

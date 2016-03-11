@@ -1,6 +1,6 @@
 main: com.retrontology.prizes.Prizes
 name: Prizes
-version: 0.1.5
+version: 0.1.6
 author: Retrontology
 description: A system for distribution of prizes
 permissions: 
@@ -19,6 +19,9 @@ commands:
     usage: |
       /prizes check - Check to see if you have any prizes
       /prizes claim - Claim your prizes (if any)
+      /prizes register <contest> - Register a new contest
+      /prizes make <contest> <file> - Make a file in a contest
+      /prizes set <contest> <file> <place> <player/true/false> -  Set a player or Claimed for a file in a contest
   prizes check:
     description: Check to see what prizes you have
     aliases: [prize view]
@@ -35,28 +38,28 @@ commands:
       /prizes claim
   prizes register:
     description: Register a Contest and create the related folder
-    aliases: [prize get]
+    aliases: [prize register]
     permission: prizes.admin
     permission-message: What do you think you are doing :I
     usage: |
       /prizes register <contest>
   prizes make:
     description: Make a new contest file in the contest folder
-    aliases: [prize get]
+    aliases: [prize make]
     permission: prizes.admin
     permission-message: What do you think you are doing :I
     usage: |
       /prizes make <contest>  <file>
   prizes set:
     description: Set a player's place in a contest file and inits their Claimed value to false
-    aliases: [prize get]
+    aliases: [prize set]
     permission: prizes.admin
     permission-message: What do you think you are doing :I
     usage: |
       /prizes set <contest> <file> <place> <player>
   prizes set:
     description: Set a place's Claimed value in a contest file
-    aliases: [prize get]
+    aliases: [prize set]
     permission: prizes.admin
     permission-message: What do you think you are doing :I
     usage: |
