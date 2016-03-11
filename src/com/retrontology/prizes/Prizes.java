@@ -23,6 +23,9 @@ public class Prizes extends JavaPlugin {
 		server = this.getServer();
 		plugin = this;
 		
+		// Register Events
+		server.getPluginManager().registerEvents(new PrizesListener(this), this);
+		
 		// Register Commands
 		this.getCommand("prizes").setExecutor(new PrizesCommandExecutor(this));
 	}
@@ -45,6 +48,13 @@ public class Prizes extends JavaPlugin {
 		for(File file : new File(this.getDataFolder(), File.separator + "Contests").listFiles()){
 			if(file.isDirectory()){ list.add(new PrizesContest(this, file.getName())); }
 		}
+		return list;
+	}
+	
+	// Get list of Prizes for player
+	public List<String> getPlayerPrizes(String player){
+		List<String> list = new ArrayList<String>();
+		for(PrizesContest contest : plugin.getPrizesContests()){ list.addAll(contest.checkPrizes(player));}
 		return list;
 	}
 	

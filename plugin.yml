@@ -1,6 +1,6 @@
 main: com.retrontology.prizes.Prizes
 name: Prizes
-version: 0.1.4
+version: 0.1.5
 author: Retrontology
 description: A system for distribution of prizes
 permissions: 
