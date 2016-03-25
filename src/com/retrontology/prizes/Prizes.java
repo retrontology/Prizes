@@ -23,6 +23,10 @@ public class Prizes extends JavaPlugin {
 		server = this.getServer();
 		plugin = this;
 		
+		// Init folders
+		File filecontests = new File(this.plugin.getDataFolder(), File.separator+"Contests");
+		if(!filecontests.exists()){ filecontests.mkdirs(); }
+		
 		// Register Events
 		server.getPluginManager().registerEvents(new PrizesListener(this), this);
 		
