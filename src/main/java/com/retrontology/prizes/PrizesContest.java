@@ -95,7 +95,7 @@
 /*     */   
 /*     */   public boolean makeFileFromList(List<UUID> list) {
 /*  97 */     Date date = new Date();
-/*  98 */     File file = getFile(date.getTime());
+/*  98 */     File file = getFile(String.valueOf(date.getTime()));
 /*  99 */     if (!file.exists()) {
 /*     */       try {
 /* 101 */         file.createNewFile();
@@ -128,7 +128,7 @@
 /* 128 */     List<String> prizestrings = new ArrayList<>();
 /* 129 */     for (File contestfile : getFileList()) {
 /* 130 */       YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(contestfile);
-/* 131 */       for (int i = 1; yamlConfiguration.getString(i) != null; i++) {
+/* 131 */       for (int i = 1; yamlConfiguration.getString(String.valueOf(i)) != null; i++) {
 /* 132 */         if (player.equals(UUID.fromString(yamlConfiguration.getString(String.valueOf(i) + ".UUID"))) && !yamlConfiguration.getBoolean(String.valueOf(i) + ".Claimed")) {
 /* 133 */           prizestrings.add(String.valueOf(this.contest) + ": " + i);
 /*     */         }
@@ -147,7 +147,7 @@
 /* 147 */     for (File file : getFileList()) {
 /* 148 */       if (invfull)
 /* 149 */         break;  YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
-/* 150 */       for (int i = 1; yamlConfiguration.getString(i) != null; i++) {
+/* 150 */       for (int i = 1; yamlConfiguration.getString(String.valueOf(i)) != null; i++) {
 /* 151 */         if (player.getUniqueId().equals(UUID.fromString(yamlConfiguration.getString(String.valueOf(i) + ".UUID"))) && !yamlConfiguration.getBoolean(String.valueOf(i) + ".Claimed")) {
 /* 152 */           List<ItemStack> list = this.plugin.getPrizesConfig().getPrizeItemList(this.contest, i);
 /* 153 */           if (list.size() > freespace) {
