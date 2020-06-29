@@ -1,10 +1,9 @@
 /*    */ package com.retrontology.prizes;
 /*    */ 
 /*    */ import org.bukkit.Bukkit;
-/*    */ import org.bukkit.scheduler.BukkitRunnable;
 /*    */ 
 /*    */ public class PrizesNotifyTask
-/*    */   extends BukkitRunnable {
+/*    */ implements Runnable {
 /*    */   private Prizes plugin;
 /*  9 */   private PrizesNotify pnotify = new PrizesNotify();
 /*    */ 
